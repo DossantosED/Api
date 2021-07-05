@@ -108,7 +108,6 @@ class PostController extends Controller
         $user = json_decode($data->getContent())->user;
         $post = Post::find($idPost);
         $update = [];
-        $update["updated_at"] = $post->created_at;
         if($post->like_user && strlen($post->like_user) > 1){
             $users = explode("-", $post->like_user);
             if(in_array($user, $users)){
