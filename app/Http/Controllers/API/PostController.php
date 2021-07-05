@@ -108,6 +108,7 @@ class PostController extends Controller
         $user = json_decode($data->getContent())->user;
         $post = Post::find($idPost);
         $update = [];
+        $like = false;
         if($post->like_user && strlen($post->like_user) > 1){
             $users = explode("-", $post->like_user);
             if(in_array($user, $users)){
@@ -124,6 +125,7 @@ class PostController extends Controller
                 $update["like_user"] = $users;
             }else{
                 $update["likes"] = $post->likes + 1;
+                $like = true;
             }
         }else if($post->like_user && $post->likes > 0){
             if($user == $post->like_user){
@@ -132,15 +134,17 @@ class PostController extends Controller
             }else{
                 $update["likes"] = $post->likes + 1;
                 $update["like_user"] = $post->like_user."-".$user;
+                $like = true;
             }
         }else if($post->like_user == NULL){
             $update["likes"] = $post->likes + 1;
             $update["like_user"] = $user;
+            $like = true;
         }else{
             $update["likes"] = 0;
         }
         $post->update($update);
-        return response()->json(['exito' => true, 'cant' => $post->likes], 200);
+        return response()->json(['like' => $like, 'cant' => $post->likes], 200);
     }
 
     /**
