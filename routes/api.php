@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AdaraController;
 use App\Http\Controllers\API\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,5 @@ Route::post('insertPost', [PostController::class,'store']);
 Route::post('likePost', [PostController::class,'likePost']);
 Route::put('updatePost', [PostController::class,'update']);
 Route::delete('deletePost', [PostController::class,'destroy']);
+
+Route::post('chatBot', [AdaraController::class,'response']);

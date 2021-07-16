@@ -114,6 +114,7 @@ class PostController extends Controller
             if(in_array($user, $users)){
                 $update["likes"] = $post->likes - 1;
                 unset($users[array_search($user,$users)]);
+		$users = array_values($users);
                 $user_init = $users[0];
                 if(count($users)>1){
                     for($i = 1, $cantUsers = count($users); $i<$cantUsers; $i++){
