@@ -28,3 +28,4 @@ Route::put('updatePost', [PostController::class,'update']);
 Route::delete('deletePost', [PostController::class,'destroy']);
 
 Route::post('chatBot', [AdaraController::class,'response']);
+Route::get('getToken', [AdaraController::class, 'token']);
